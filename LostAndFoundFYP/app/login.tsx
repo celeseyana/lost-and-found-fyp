@@ -8,6 +8,7 @@ import {
   Platform,
   ScrollView
 } from "react-native";
+import { router } from "expo-router";
 import { useState } from "react";
 
 export default function Login() {
@@ -90,13 +91,13 @@ export default function Login() {
             <Text style={styles.loginButtonText}>Login</Text>
           </TouchableOpacity>
 
-          {/* Sign Up Link */}
-          <View style={styles.signupContainer}>
+            {/* Sign Up Link */}
+            <View style={styles.signupContainer}>
             <Text style={styles.signupText}>Don&apos;t have an account? </Text>
-            <TouchableOpacity>
-              <Text style={styles.signupLink}>Sign Up</Text>
+            <TouchableOpacity onPress={() => router.push('/signup')}>
+                <Text style={styles.signupLink}>Sign Up</Text>
             </TouchableOpacity>
-          </View>
+            </View>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
