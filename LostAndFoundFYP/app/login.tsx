@@ -18,6 +18,7 @@ export default function Login() {
 
   const handleLogin = () => {
     // Add your login logic here
+    router.push('/main');
     console.log("Login attempted with:", { studentId, password });
   };
 
