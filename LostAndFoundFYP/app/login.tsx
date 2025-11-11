@@ -6,7 +6,8 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   Platform,
-  ScrollView
+  ScrollView,
+  Alert
 } from "react-native";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -17,10 +18,20 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = () => {
-    // Add your login logic here
-    router.push('/main');
+    console.log("=== handleLogin called ===");
     console.log("Login attempted with:", { studentId, password });
+    
+    try {
+      console.log("Attempting to navigate to /main");
+      router.push('/main');
+      console.log("Navigation called successfully");
+    } catch (error) {
+      console.error("Navigation error:", error);
+      Alert.alert("Error", "Failed to navigate");
+    }
   };
+
+  console.log("Login component rendered");
 
   return (
     <KeyboardAvoidingView 
@@ -86,19 +97,22 @@ export default function Login() {
           {/* Login Button */}
           <TouchableOpacity 
             style={styles.loginButton}
-            onPress={handleLogin}
+            onPress={() => {
+              console.log("Login button pressed!");
+              handleLogin();
+            }}
             activeOpacity={0.8}
           >
             <Text style={styles.loginButtonText}>Login</Text>
           </TouchableOpacity>
 
-            {/* Sign Up Link */}
-            <View style={styles.signupContainer}>
+          {/* Sign Up Link */}
+          <View style={styles.signupContainer}>
             <Text style={styles.signupText}>Don&apos;t have an account? </Text>
             <TouchableOpacity onPress={() => router.push('/signup')}>
-                <Text style={styles.signupLink}>Sign Up</Text>
+              <Text style={styles.signupLink}>Sign Up</Text>
             </TouchableOpacity>
-            </View>
+          </View>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
